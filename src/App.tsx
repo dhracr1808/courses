@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useCallback, useMemo, useState } from "react";
+import { Button } from "./components";
 
+import "./App.css";
+
+const buttonStyles = {
+  primary: {
+    color: "#ffffff",
+    background: "#651fff",
+    transition: "all 1s ease",
+  },
+  secondary: {
+    color: "#651fff",
+    background: "#ffffff",
+    transition: "all 1s ease",
+  },
+  dark: { color: "#ffffff", background: "#5d5d5d", transition: "all 1s ease" },
+};
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [myState, setMyState] = useState(true);
 
+  const currentStyle = useMemo(() => {
+    console.log("se re calcula");
+    if (count <= 5) return buttonStyles.primary;
+    if (count <= 10) return buttonStyles.secondary;
+    return buttonStyles.dark;
+  }, [count]);
+
+  console.log("ok");
+  const countMore = () => {
+    return setCount((cur) => cur + 1);
+  };
+  const increment = useCallback(() => {
+    console.log("ok useCallback");
+    setCount((c) => c + 1);
+  }, []);
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <button style={currentStyle} onClick={increment}>
+        count is {count}
+      </button>
+
+      <button
+        style={myState ? buttonStyles.primary : buttonStyles.dark}
+        onClick={() => setMyState((cur) => (cur = !cur))}
+      >
+        {myState ? "active" : "desactive"}
+      </button>
+
+      <Button label={`Count is: ${count}`} parentMethod={countMore} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
