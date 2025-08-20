@@ -7,3 +7,7 @@
 
 ¿Barriles?
 es la forma de importar los archivos de una forma mas legible y ordenada
+
+- batching
+  es la forma en la que react agrupa los cambios de estado al cambiar los estados de
+  forma consecutiva.
