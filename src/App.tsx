@@ -1,50 +1,30 @@
-import { useEffect, useState } from "react";
-
 import "./App.css";
-
+import { useFetch } from "./hooks";
+import { type DataPokemon, pokemonAdapter } from "./adapter/pokemon";
+import { ListImage, Button } from "./components";
+import { useState } from "react";
 const URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
 
 function App() {
-  const [data, setData] = useState<{ name: string }[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-
-  const consoleLoader = (loadingValue: boolean) => {
-    setLoading(loadingValue);
-    console.info(loadingValue);
+  const { data, loading, error } = useFetch<DataPokemon>(URL);
+  const [showData, setShowData] = useState(true);
+  const toggleData = () => {
+    setShowData(!showData);
   };
-
-  const fechtData = async () => {
-    try {
-      consoleLoader(true);
-      const response = await fetch(URL);
-      if (!response.ok) throw new Error("Error fetching data");
-      const jsonData = await response.json();
-      setData(jsonData.results);
-    } catch (error) {
-      setError(error as string);
-      console.log("Error fetching data: ", error);
-    } finally {
-      consoleLoader(false);
-    }
-  };
-
-  // comincarnos con un endpoint
-  // operacion asincronas
-  // parametros de entrada
-  // context
-  useEffect(() => {
-    fechtData();
-  }, []);
   if (loading) return <p>loading...</p>;
-  if (error) return <p>Upps! sucedio un error: {error}</p>;
+  if (error) return <p>Upps! sucedio un error: {error.message}</p>;
   return (
     <>
-      <ul>
-        {data.map((item) => (
-          <li key={item.name}>{item.name}</li>
-        ))}
-      </ul>
+      <Button label="mostrar componente" parentMethod={toggleData} />
+      {showData && (
+        <div>
+          <ul>
+            {pokemonAdapter(data).map((item) => (
+              <ListImage key={item.name} {...item} />
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 }
