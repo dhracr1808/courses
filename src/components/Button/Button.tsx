@@ -1,9 +1,10 @@
+import type React from "react";
 import "./button.css";
 import type { ReactNode } from "react";
 
-interface Props extends reactWithChildren<"button"> {
+interface Props extends React.ComponentPropsWithRef<"button"> {
   children: ReactNode;
-  parentMethod: () => void;
+  parentMethod?: (e?: any) => void;
 }
 interface ChildrenProps {
   children: ReactNode;
@@ -12,9 +13,9 @@ export const ColorRed = ({ children }: ChildrenProps) => {
   return <div className="color-red">{children}</div>;
 };
 
-export const Button = ({ children, parentMethod }: Props) => {
+export const Button = ({ children, parentMethod, ...rest }: Props) => {
   return (
-    <button className="custom-button" onClick={parentMethod}>
+    <button {...rest} className="custom-button">
       {children}
     </button>
   );

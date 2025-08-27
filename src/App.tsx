@@ -14,6 +14,17 @@ function App() {
   const otraFuncion = () => {
     alert("Hola !");
   };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    const formData = new FormData(target);
+    target.childNodes.forEach((el) => {
+      console.log(el);
+    });
+    console.log("Formulario enviado");
+  };
+
   return (
     <>
       <ColorRed>
@@ -21,9 +32,19 @@ function App() {
       </ColorRed>
       <Button parentMethod={handleClick}>boton normal</Button>
       <AppForm>
-        <Button parentMethod={otraFuncion}>
-          <span>Submit</span>
-        </Button>
+        <input
+          data-regex="^.{5,}$"
+          name="username"
+          type="text"
+          placeholder="Escribe tu nombre"
+        />
+        <input name="lastname" type="text" placeholder="Escribe tu apellido" />
+        <input
+          name="password"
+          type="password"
+          placeholder="Escribe tu contraseña"
+        />
+        <button type="submit">Enviar</button>
       </AppForm>
     </>
   );
