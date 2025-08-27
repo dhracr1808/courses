@@ -1,5 +1,12 @@
 .custom-button {
-  color: "#ffffff";
-  background: "#651fff";
+  color: inherit;
+  background: inherit;
   transition: "all 1s ease";
+  border-radius: inherit;
+}
+
+.color-red {
+  border-radius: 50px;
+  color: red;
+  background: blueviolet;
 }
