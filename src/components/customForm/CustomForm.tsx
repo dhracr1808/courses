@@ -11,6 +11,12 @@ export const CustomForm = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     mode: "onBlur",
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
   const submit: SubmitHandler<FormValues> = (data) => {
