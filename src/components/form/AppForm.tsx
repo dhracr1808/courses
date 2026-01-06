@@ -29,9 +29,11 @@ export const AppForm = ({ children, ...rest }: Props) => {
     <form {...rest}>
       {children}
       <h2>{value}</h2>
-      <h2>
-        {user.name} - {user.email} - {user.password}
-      </h2>
+      {user && (
+        <h2>
+          {user.name} - {user.email} - {user.password}
+        </h2>
+      )}
       <button type="button" onClick={() => setValue(10)}>
         cancelar
       </button>

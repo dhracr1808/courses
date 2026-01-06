@@ -7,7 +7,7 @@ export interface UserContextType {
 }
 
 interface UserContextProviderType {
-  user: UserContextType;
+  user: UserContextType | null;
   setUser: React.Dispatch<React.SetStateAction<UserContextType>>;
 }
 
@@ -18,7 +18,7 @@ export const initialUserState: UserContextType = {
 };
 
 export const UserContextProvider = createContext<UserContextProviderType>({
-  user: initialUserState,
+  user: null,
   setUser: () => {},
 });
 
