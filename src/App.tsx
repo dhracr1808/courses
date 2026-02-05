@@ -1,9 +1,9 @@
 import "./App.css";
-import { ShoppingCar } from "@/components";
+import { PhoneBook } from "@/components";
 function App() {
   return (
     <>
-      <ShoppingCar />
+      <PhoneBook />
     </>
   );
 }

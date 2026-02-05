@@ -1,11 +1,10 @@
-use memo
+use callback
 
-// objetivo
-controlar si el beneficio de memorizarlo es superior al de recalcularlo
-
-memorizar(cache) el resultado de ejecutar una funcion costosa, para evitar
-que se vuelva a llamar
+// se utiliza para memorizar una instancia de una funcion
+// hace que un hijo no renderice
 
 Ejemplo
 
-si no agregamos nada ni tampoco cambio nada, cual es el costo total?.
+supongamos que tienes un numero de telefono al que llamas con frecuencia.
+en vez de marcar continuamente lo vamos a almacenar en los contactos del telefono.
+a memos que el numero cambie utilizo el mismo contacto.
