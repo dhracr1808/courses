@@ -13,7 +13,7 @@ export const Bookreader = () => {
     if (currentPageRef.current === 1) {
       console.log(
         "No se puede ir a la página por que ya te encuentras en ",
-        currentPageRef.current
+        currentPageRef.current,
       );
       return;
     }
