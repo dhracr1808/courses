@@ -1,13 +1,11 @@
-use ref
+use memo
 
-// objetivo 01
-// nos permite crear una referencia mutable que persiste durante todo el ciclo de vida del
-componente sin causar un re render
+// objetivo
+controlar si el beneficio de memorizarlo es superior al de recalcularlo
 
-// objetivo 02
+memorizar(cache) el resultado de ejecutar una funcion costosa, para evitar
+que se vuelva a llamar
 
-hacer referencia a un elemento del DOM
+Ejemplo
 
-// Ejemplo
-// un marcador de un libro que utilizamos para guardar la ultima posicion de la lectura.
-// no modifica el contenido del libro
+si no agregamos nada ni tampoco cambio nada, cual es el costo total?.
