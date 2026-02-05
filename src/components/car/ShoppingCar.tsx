@@ -17,13 +17,12 @@ export const ShoppingCar = () => {
   const totalCost = useMemo(
     () =>
       items.reduce((total, item) => {
-        console.log("okkkk");
+        console.log("render");
         return total + item.price;
       }, 0),
     [items],
   );
   const discountedTotal = useMemo(() => {
-    console.log("recalculando discount");
     return totalCost * discount;
   }, [totalCost, discount]);
 
