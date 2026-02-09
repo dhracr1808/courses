@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { Modal } from "./modal/Modal";
 import { useModalContext } from "./modal/useModalContext";
+import { PromiseError } from "./components";
 
 function App() {
   const { openModal } = useModalContext();
@@ -12,6 +13,7 @@ function App() {
   };
   return (
     <>
+      <PromiseError />
       <h1>hello word</h1>
       <button onClick={() => openModalWithId(0)}>Open Modal 1</button>
       <button onClick={() => openModalWithId(1)}>Open Modal 2</button>
