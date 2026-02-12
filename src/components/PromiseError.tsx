@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react";
+import { getCharacter } from "@/services/api.service";
+import { useApi } from "@/hooks/useApi";
+import { type Character } from "@/models";
 
-export const PromiseError = () => {
-  const [data, setData] = useState<{ name: string }[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    const getData = async (url: string) => {
-      try {
-        throw new Error("la promesa se fue a la uppp");
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data.results);
-        setData(data.results);
-      } catch (error) {
-        setError("error");
-      }
-    };
-    getData("https://pokeapi.co/api/v2/pokemon?limit=5offset=0");
-  }, []);
+//https://pokeapi.co/api/v2/pokemon?limit=5offset=0
+export const PromiseError = ({ id }: { id: string }) => {
+  const { loading, data, error, fetch } = useApi<Character, number>(
+    getCharacter,
+  );
+
   if (error) throw new Error("fallo la peticion");
+  if (loading) return <p>cargandos ...</p>;
   return (
     <div>
-      <h2>PromiseError</h2>
-      <ul>
-        {data.map((ele) => (
-          <li key={ele.name}>{ele.name}</li>
-        ))}
-      </ul>
+      <h2>My Person is</h2>
+      <button onClick={() => fetch(1)}>click me</button>
+
+      {data ? (
+        <div>
+          <h3>
+            {data.name} - {data.gender}
+          </h3>
+          <img src={data.image} alt={data.name} />
+        </div>
+      ) : (
+        <p>cargango... </p>
+      )}
     </div>
   );
 };

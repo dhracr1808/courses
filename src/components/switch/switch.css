@@ -1,0 +1,52 @@
+input {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input::before {
+  content: "";
+  height: 24px;
+  width: 40px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  background: white;
+  border: 1px solid #ffffff;
+  position: absolute;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+input::after {
+  content: "";
+  height: 20px;
+  width: 20px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  cursor: pointer;
+  background: rgb(48, 48, 48);
+  box-shadow: 1px 1px 15px #ffffff;
+  transition: transform 0.3s ease;
+  position: absolute;
+  border-radius: 100%;
+  z-index: 20;
+  transform: translate(2px);
+}
+
+input:checked::after {
+  background: rgb(135, 2, 187);
+  box-shadow: 1px 1px 15px #6300f6;
+  transform: translate(20px);
+}
+
+input:checked::before {
+  background: white;
+  border: 1px solid #5902db;
+}
