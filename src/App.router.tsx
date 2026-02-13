@@ -1,12 +1,10 @@
 import type { ReactNode } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route } from "react-router-dom";
 import { Login } from "@/public/Login";
-import { Dashboar } from "@/private/Dashboar";
-import { AdminPanel } from "@/private/AdminPage";
-
 import { PrivateGuard } from "./guard/private.guard";
-import { AdminGuard } from "./guard/admin.guard";
 
+import { RoutesWithNotFound } from "@/components/RoutesWithNotFound";
+import { PrivateRouter } from "@/private.router";
 interface Props {
   children: ReactNode;
 }
@@ -15,16 +13,14 @@ export const AppRouter = ({ children }: Props) => {
   return (
     <BrowserRouter>
       {children}
-      <Routes>
+      <RoutesWithNotFound>
         <Route path="/" element={<Navigate to={"/login"} replace />} />
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateGuard />}>
-          <Route path="/private" element={<Dashboar />} />
-          <Route element={<AdminGuard />}>
-            <Route path="/private/admin" element={<AdminPanel />} />
-          </Route>
+          <Route path="/private/*" element={<PrivateRouter />} />
         </Route>
-      </Routes>
+        <Route path="*" element={<h1>404 not found</h1>} />
+      </RoutesWithNotFound>
     </BrowserRouter>
   );
 };
