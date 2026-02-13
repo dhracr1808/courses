@@ -22,12 +22,8 @@ function App() {
 
       <Modal keySkip>
         <h1>Modal {currentModal}</h1>
-        {currentModal === 0 && (
-          <PromiseError id={(currentModal + 1).toString()} />
-        )}
-        {currentModal === 1 && (
-          <PromiseError id={(currentModal + 1).toString()} />
-        )}
+        {currentModal === 0 && <PromiseError id={currentModal + 1} />}
+        {currentModal === 1 && <PromiseError id={currentModal + 1} />}
       </Modal>
     </>
   );

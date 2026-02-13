@@ -6,8 +6,10 @@ type CustomError = Error | null;
 
 type UseApiOptions<P> = {
   autoFetch?: boolean;
-} & (P extends null ? { params?: P } : { params: P });
+  params: P;
+};
 
+//& (P extends null ? { params?: P } : { params: P });
 interface UseApiResult<T, P> {
   loading: boolean;
   error: CustomError;
@@ -29,13 +31,11 @@ export const useApi = <T, P>(
       setLoading(true);
       call
         .then((resp) => {
-          console.log(resp);
           setData(resp.data);
           setError(null);
         })
         .catch((err) => {
           setError(err);
-          console.log(err);
         })
         .finally(() => {
           setLoading(false);
@@ -46,9 +46,9 @@ export const useApi = <T, P>(
   );
 
   useEffect(() => {
-    if (options && options.autoFetch && options.params) {
+    if (options?.autoFetch) {
       return fetch(options.params);
     }
-  }, [options?.autoFetch, options?.params]);
+  }, [fetch, options?.autoFetch, options?.params]);
   return { loading, data, error, fetch };
 };

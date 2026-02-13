@@ -4,7 +4,7 @@ import { loadAbort } from "@/utils";
 import { type UseApiCall } from "@/models";
 const BASE_URL = "https://rickandmortyapi.com/api";
 
-export const getCharacter = (id: number | null): UseApiCall<Character> => {
+export const getCharacter = (id: number): UseApiCall<Character> => {
   const controller = loadAbort();
   return {
     call: axios.get<Character>(`${BASE_URL}/character/${id}`, {
